@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Train tokenizer (tiny shakespeare)",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/cmd/llm",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Train tokenizer (enwik8)",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/cmd/llm",
+            "cwd": "${workspaceFolder}",
+            "args": ["-data", "data/enwik8", "-vocab", "4096"]
+        },
+        {
+            "name": "Debug tests in current package",
+            "type": "go",
+            "request": "launch",
+            "mode": "test",
+            "program": "${fileDirname}"
+        }
+    ]
+}

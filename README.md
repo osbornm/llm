@@ -50,3 +50,21 @@ curl -L -o data/tinystories-valid.txt \
 Use `tinyshakespeare.txt` while developing (fast iteration), then `enwik8` to
 train a larger vocabulary and stress-test performance and edge cases
 (XML markup, entities, multilingual fragments).
+
+## Training the tokenizer
+
+```sh
+go run ./cmd/llm                                      # tiny shakespeare, vocab 512
+go run ./cmd/llm -data data/enwik8 -vocab 4096        # bigger run
+```
+
+A training run writes the result as a Hugging Face-compatible
+`tokenizer.json` (byte-level BPE, GPT-2 family layout — controlled by the
+`-out` flag). It can be loaded by the `tokenizers` library directly:
+
+```python
+from tokenizers import Tokenizer
+
+tok = Tokenizer.from_file("tokenizer.json")
+print(tok.encode("hello world").tokens)
+```

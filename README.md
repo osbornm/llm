@@ -58,13 +58,6 @@ go run ./cmd/llm                                      # tiny shakespeare, vocab 
 go run ./cmd/llm -data data/enwik8 -vocab 4096        # bigger run
 ```
 
-A training run writes the result as a Hugging Face-compatible
-`tokenizer.json` (byte-level BPE, GPT-2 family layout — controlled by the
-`-out` flag). It can be loaded by the `tokenizers` library directly:
-
-```python
-from tokenizers import Tokenizer
-
-tok = Tokenizer.from_file("tokenizer.json")
-print(tok.encode("hello world").tokens)
-```
+Each run trains once and reports the actual vocabulary size, merge count,
+elapsed time, throughput in MB/s, total allocated MB, and allocation count.
+Timing and allocation measurements exclude reading the input file.
